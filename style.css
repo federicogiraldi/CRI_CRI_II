@@ -306,3 +306,50 @@ footer a:hover{color:var(--smeraldina);}
 @media (max-width:860px){.two-col{grid-template-columns:1fr;}}
 .two-col.reverse .col-text{order:2;}
 @media (max-width:860px){.two-col.reverse .col-text{order:0;}}
+
+/* Stile di base per il pulsante hamburger (se non è già presente) */
+.nav-toggle {
+  display: none; /* Nascosto su desktop */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* Icona hamburger (puoi personalizzarla o usare linee stilizzate) */
+.nav-toggle::before {
+  content: "☰";
+  font-size: 1.8rem;
+  color: var(--ink, #111);
+}
+
+.nav-toggle.active::before {
+  content: "✕"; /* Diventa una "X" quando è aperto */
+}
+
+/* Regole per dispositivi mobili */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: block; /* Mostra il pulsante su mobile */
+  }
+
+  /* Nascondi i link di default su mobile */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff; /* O il colore di sfondo del tuo header */
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+    gap: 15px;
+    box-sizing: border-box;
+  }
+
+  /* Quando il JavaScript aggiunge la classe, il menu compare */
+  .nav-links.nav-open {
+    display: flex;
+  }
+}
