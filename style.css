@@ -6,12 +6,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root{
-  --ink: #0D2235;          /* Blu navy profondo */
+  --ink: #0D2235;         /* Blu navy profondo */
   --ink-70: rgba(13,34,53,.78);
   --ink-45: rgba(13,34,53,.52);
   
   /* Sfondi morbidi */
-  --linen: #F3F7F8;        /* Acquamarina ultra-chiaro */
+  --linen: #F3F7F8;       /* Acquamarina ultra-chiaro */
   --linen-dim: #E2ECEE;    /* Azzurro polvere per sezioni alternate */
   
   /* Colore PROTAGONISTA: Verde Acqua Smeraldina */
@@ -122,21 +122,54 @@ p{margin:0 0 1em;color:var(--ink-70);}
   transition: background 0.2s ease;
 }
 .nav-cta:hover{background:var(--smeraldina-dark);}
-.nav-toggle{display:none;background:none;border:0;font-size:1.6rem;cursor:pointer;color:var(--smeraldina-dark);}
 
-@media (max-width:860px){
-  .nav-links{
-    position:fixed;top:64px;left:0;right:0;
-    background:var(--linen);
-    flex-direction:column;align-items:flex-start;
-    padding:24px 28px 32px;gap:20px;
-    border-bottom:1px solid var(--line);
-    transform:translateY(-120%);opacity:0;
-    transition:transform .3s ease, opacity .3s ease;
-    pointer-events:none;
+/* Pulsante Hamburger (inizialmente nascosto su desktop) */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.6rem;
+  color: var(--smeraldina-dark);
+}
+
+/* Icona hamburger standard */
+.nav-toggle::before {
+  content: "☰";
+}
+
+/* Icona a 'X' quando attivo */
+.nav-toggle.active::before {
+  content: "✕";
+}
+
+/* ---------- MEDIA QUERY PER DISPOSITIVI MOBILI ---------- */
+@media (max-width: 860px){
+  .nav-toggle {
+    display: block; /* Mostra il pulsante hamburger su mobile */
   }
-  .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto;}
-  .nav-toggle{display:block;}
+
+  .nav-links{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--linen);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 28px 32px;
+    gap: 20px;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    display: none; /* Nascosto di base */
+  }
+
+  /* Quando JavaScript attiva la classe, il menu compare correttamente */
+  .nav-links.nav-open {
+    display: flex !important;
+  }
 }
 
 /* ---------- buttons ---------- */
@@ -306,50 +339,3 @@ footer a:hover{color:var(--smeraldina);}
 @media (max-width:860px){.two-col{grid-template-columns:1fr;}}
 .two-col.reverse .col-text{order:2;}
 @media (max-width:860px){.two-col.reverse .col-text{order:0;}}
-
-/* Stile di base per il pulsante hamburger (se non è già presente) */
-.nav-toggle {
-  display: none; /* Nascosto su desktop */
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-}
-
-/* Icona hamburger (puoi personalizzarla o usare linee stilizzate) */
-.nav-toggle::before {
-  content: "☰";
-  font-size: 1.8rem;
-  color: var(--ink, #111);
-}
-
-.nav-toggle.active::before {
-  content: "✕"; /* Diventa una "X" quando è aperto */
-}
-
-/* Regole per dispositivi mobili */
-@media (max-width: 768px) {
-  .nav-toggle {
-    display: block; /* Mostra il pulsante su mobile */
-  }
-
-  /* Nascondi i link di default su mobile */
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: #fff; /* O il colore di sfondo del tuo header */
-    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
-    padding: 20px;
-    gap: 15px;
-    box-sizing: border-box;
-  }
-
-  /* Quando il JavaScript aggiunge la classe, il menu compare */
-  .nav-links.nav-open {
-    display: flex;
-  }
-}
